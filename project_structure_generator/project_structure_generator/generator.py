@@ -25,8 +25,8 @@ def create_structure(base_path):
     for directory in directories:
         path = os.path.join(backend_path, directory)
         os.makedirs(path, exist_ok=True)
-        with open(os.path.join(path, '__init__.py'), 'w') as f:
-            pass  # create an empty __init__.py file
+        # with open(os.path.join(path, '__init__.py'), 'w') as f:
+        #     pass  # create an empty __init__.py file
 
 
 def main():
