@@ -1,6 +1,6 @@
-# PyStructure Builder
+# Project Structure Builder
 
-`pystructure_builder` is a Python package that automatically creates a predefined directory structure for a backend project. This tool helps you quickly set up the necessary folders and `__init__.py` files for a Python project.
+`project_structure_builder` is a Python package that automatically creates a predefined directory structure for a backend project. This tool helps you quickly set up the necessary folders and `__init__.py` files for a Python project.
 
 ## Features
 
@@ -21,8 +21,8 @@
 You can install the package via pip:
 
 ```bash
-pip install pystructure_builder
+pip install project_structure_builder
 
-After installing pystructure_builder run the following command:-
+After installing project_structure_builder run the following command:-
 create_structure /path/to/desired/location
  

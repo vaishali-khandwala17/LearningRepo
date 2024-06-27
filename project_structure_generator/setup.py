@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name="PyStructure Builder",
+    name="project_structure_builder",
     version="0.1.0",
     packages=find_packages(),
     include_package_data=True,
