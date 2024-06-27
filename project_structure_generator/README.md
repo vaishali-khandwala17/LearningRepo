@@ -22,3 +22,7 @@ You can install the package via pip:
 
 ```bash
 pip install project_structure_generator
+
+After installing project_structure_generator run the following command:-
+create_structure /path/to/desired/location
+ 
