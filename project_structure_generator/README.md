@@ -1,6 +1,6 @@
-# Project Structure Generator
+# PyStructure Builder
 
-`project_structure_generator` is a Python package that automatically creates a predefined directory structure for a backend project. This tool helps you quickly set up the necessary folders and `__init__.py` files for a Python project.
+`pystructure_builder` is a Python package that automatically creates a predefined directory structure for a backend project. This tool helps you quickly set up the necessary folders and `__init__.py` files for a Python project.
 
 ## Features
 
@@ -21,8 +21,8 @@
 You can install the package via pip:
 
 ```bash
-pip install project_structure_generator
+pip install pystructure_builder
 
-After installing project_structure_generator run the following command:-
+After installing pystructure_builder run the following command:-
 create_structure /path/to/desired/location
  
