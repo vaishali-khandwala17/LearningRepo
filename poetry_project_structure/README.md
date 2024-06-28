@@ -1,6 +1,6 @@
 # Project Structure Generator
 
-`project_structure_generator` is a Python package that automatically creates a predefined directory structure for a backend project. This tool helps you quickly set up the necessary folders and `__init__.py` files for a Python project.
+`project_structure_generator_vaishali` is a Python package that automatically creates a predefined directory structure for a backend project. This tool helps you quickly set up the necessary folders and `__init__.py` files for a Python project.
 
 ## Features
 
@@ -21,4 +21,4 @@
 You can install the package via pip:
 
 ```bash
-pip install project_structure_generator
+pip install project_structure_generator_vaishali
