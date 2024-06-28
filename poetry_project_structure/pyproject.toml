@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "project_structure_generator"
+version = "0.1.0"
+description = "A package to generate a predefined project structure"
+authors = ["Vaishali Khandwala"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.scripts]
+create_structure = "project_structure_generator.generator:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
