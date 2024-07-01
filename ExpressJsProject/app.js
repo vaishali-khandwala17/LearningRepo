@@ -3,12 +3,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const mongoose = require('mongoose');
-require('dotenv').config();
+
+const {connectDB} = require('./config/db');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-
+const itemsRouter = require('./routes/items');
 const app = express();
 
 // view engine setup
@@ -23,16 +23,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/items', itemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.listen(3001, function() {
-  console.log("Listening on port 3000");
-})
+// app.listen(3001, function() {
+//   console.log("Listening on port 3000");
+// })
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -44,8 +44,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Could not connect to MongoDB', err));
+
+connectDB();
 
 module.exports = app;
