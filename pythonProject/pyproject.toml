@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "new_project"
+version = "0.1.0"
+description = "A new project using project_structure_generator"
+authors = ["Vaishali Khandwala"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+project_structure_generator = { git = "https://<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>@github.com/vaishali-khandwala17/project_structure_generator.git", tag = "v0.1.0" }
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
