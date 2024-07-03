@@ -16,5 +16,33 @@ router.post('/insert-item', async (req, res) => {
     }
 });
 
+router.get('/get-items', async (req, res) => {
+    try {
+        const items = await Item.find();
+        res.json(items);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.get('/get-item', async (req, res) => {
+    const itemId = req.query.id;
+
+    if (!itemId) {
+        return res.status(400).json({ message: 'Item ID is required' });
+    }
+
+    try {
+        const item = await Item.findById(itemId);
+        if (item == null) {
+            return res.status(404).json({ message: 'Item not found' });
+        }
+        res.json(item);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
 
 module.exports = router;

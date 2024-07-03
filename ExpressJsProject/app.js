@@ -29,10 +29,10 @@ app.use('/items', itemsRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-// app.listen(3001, function() {
-//   console.log("Listening on port 3000");
-// })
+//
+app.listen(3000, function() {
+  console.log("Listening on port 3000");
+})
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
