@@ -4,11 +4,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const {connectDB} = require('./config/db');
+const Database = require('./config/db');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const itemsRouter = require('./routes/items');
+const itemsRouter = require('./routes/itemRoutes');
 const app = express();
 
 // view engine setup
@@ -45,6 +45,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-connectDB();
+// Database;
 
 module.exports = app;

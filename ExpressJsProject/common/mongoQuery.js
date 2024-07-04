@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('../config/db');
 
 class MongoQuery {
     // Create a new document
