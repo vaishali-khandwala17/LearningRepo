@@ -1,68 +1,69 @@
 const itemService = require('../service/itemService');
 const HttpEnum = require('../enums/httpEnum');
 const ResponseMessageEnum = require('../enums/responseMessageEnum');
+const AppResponse = require('../utils/appResponse');
 
 class ItemController {
-    async createItem(req, res) {
+    async createItem(req, res, next) {
         try {
             const newItem = await itemService.createItem(req.body);
-            res.status(HttpEnum.CREATED).json(newItem);
+            res.status(HttpEnum.CREATED).json(AppResponse.success(HttpEnum.CREATED, ResponseMessageEnum.ITEM_INSERTED, newItem));
         } catch (err) {
-            res.status(HttpEnum.BAD_REQUEST).json({ message: err.message });
+            next(err);
         }
     }
 
-    async getItems(req, res) {
+    async getItems(req, res, next) {
         try {
             const items = await itemService.getItems();
-            res.status(HttpEnum.OK).json(items);
+            res.status(HttpEnum.OK).json(AppResponse.success(HttpEnum.OK, 'Items retrieved successfully', items));
         } catch (err) {
-            res.status(HttpEnum.INTERNAL_SERVER_ERROR).json({ message: err.message });
+            next(err);
         }
     }
 
-    async getItemById(req, res) {
+    async getItemById(req, res, next) {
         const itemId = req.query.id;
 
         if (!itemId) {
-            return res.status(HttpEnum.BAD_REQUEST).json({ message: ResponseMessageEnum.ITEM_ID_REQUIRED });
+            return res.status(HttpEnum.BAD_REQUEST).json(AppResponse.error(HttpEnum.BAD_REQUEST, ResponseMessageEnum.ITEM_ID_REQUIRED));
         }
 
         try {
             const item = await itemService.getItemById(itemId);
-            res.status(HttpEnum.OK).json(item);
+            res.status(HttpEnum.OK).json(AppResponse.success(HttpEnum.OK, 'Item retrieved successfully', item));
         } catch (err) {
-            res.status(HttpEnum.INTERNAL_SERVER_ERROR).json({ message: err.message });
+            next(err);
         }
     }
 
-    async updateItem(req, res) {
+    async updateItem(req, res, next) {
         const itemId = req.query.id;
 
         if (!itemId) {
-            return res.status(HttpEnum.BAD_REQUEST).json({ message: ResponseMessageEnum.ITEM_ID_REQUIRED });
+            return res.status(HttpEnum.BAD_REQUEST).json(AppResponse.error(HttpEnum.BAD_REQUEST, ResponseMessageEnum.ITEM_ID_REQUIRED));
         }
 
         try {
             const updatedItem = await itemService.updateItem(itemId, req.body);
-            res.status(HttpEnum.OK).json(updatedItem);
+            res.status(HttpEnum.OK).json(AppResponse.success(HttpEnum.OK, 'Item updated successfully', updatedItem));
         } catch (err) {
-            res.status(HttpEnum.BAD_REQUEST).json({ message: err.message });
+            next(err);
         }
     }
 
-    async deleteItem(req, res) {
+    async deleteItem(req, res, next) {
         const itemId = req.query.id;
 
         if (!itemId) {
-            return res.status(HttpEnum.BAD_REQUEST).json({ message: ResponseMessageEnum.ITEM_ID_REQUIRED });
+            return res.status(HttpEnum.BAD_REQUEST).json(AppResponse.error(HttpEnum.BAD_REQUEST, ResponseMessageEnum.ITEM_ID_REQUIRED));
         }
 
         try {
             await itemService.deleteItem(itemId);
-            res.status(HttpEnum.OK).json({ message: ResponseMessageEnum.ITEM_DELETED });
+            res.status(HttpEnum.OK).json(AppResponse.success(HttpEnum.OK, ResponseMessageEnum.ITEM_DELETED));
         } catch (err) {
-            res.status(HttpEnum.INTERNAL_SERVER_ERROR).json({ message: err.message });
+            next(err);
         }
     }
 }
