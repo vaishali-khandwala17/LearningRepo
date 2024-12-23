@@ -2,14 +2,41 @@ const itemService = require('../service/itemService');
 const HttpEnum = require('../enums/httpEnum');
 const ResponseMessageEnum = require('../enums/responseMessageEnum');
 const AppResponse = require('../utils/appResponse');
+const upload = require('../utils/multer');
 
 class ItemController {
+    // async createItem(req, res, next) {
+    //     try {
+    //         const newItem = await itemService.createItem(req.body);
+    //         res.status(HttpEnum.CREATED).json(AppResponse.success(HttpEnum.CREATED, ResponseMessageEnum.ITEM_INSERTED, newItem));
+    //     } catch (err) {
+    //         next(err);
+    //     }
+    // }
     async createItem(req, res, next) {
         try {
-            const newItem = await itemService.createItem(req.body);
-            res.status(HttpEnum.CREATED).json(AppResponse.success(HttpEnum.CREATED, ResponseMessageEnum.ITEM_INSERTED, newItem));
+            console.log(next);
+            // Extract fields and file from request
+            const { name, quantity } = req.body;
+            const image = req.file; // Access uploaded file
+
+            console.log("Form Data:", req.body); // Text fields
+            console.log("Uploaded File:", req.file); // File info
+
+            if (!image || !name) {
+                return res.status(400).json({ error: 'Name and image are required' });
+            }
+
+            // Convert image buffer to Base64 or save as is
+            const imageBase64 = image.buffer.toString();
+
+            // Call the service layer
+            const newItem = await itemService.createItem({ name, quantity, image: imageBase64 });
+
+            res.status(201).json(AppResponse.success(HttpEnum.CREATED, ResponseMessageEnum.ITEM_INSERTED, newItem));
         } catch (err) {
-            next(err);
+            console.error(err);
+            // next(err);
         }
     }
 
@@ -21,6 +48,7 @@ class ItemController {
             next(err);
         }
     }
+
 
     async getItemById(req, res, next) {
         const itemId = req.query.id;

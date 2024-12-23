@@ -11,6 +11,8 @@ const itemSchema = new mongoose.Schema({
         required: true,
         min: 0,
     },
+    image: { type: Buffer, required: true }, // Store binary data for the image
+
 }, {
     timestamps: true, // Adds createdAt and updatedAt timestamps
 });

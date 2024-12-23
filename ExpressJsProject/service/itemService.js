@@ -2,8 +2,17 @@ const itemDao = require('../dao/itemDao');
 const ResponseMessageEnum = require('../enums/responseMessageEnum');
 
 class ItemService {
+    // async createItem(data) {
+    //     return await itemDao.create(data);
+    // }
     async createItem(data) {
-        return await itemDao.create(data);
+        const { name, quantity, image } = data;
+
+        // Example: Transform Base64 string into binary data if needed
+        const imageBuffer = Buffer.from(image.split(',')[1], 'base64'); // Extract after `data:image/png;base64,`
+
+        // Call the DAO with the transformed data
+        return await itemDao.create({ name, quantity, image: imageBuffer });
     }
 
     async getItems() {
